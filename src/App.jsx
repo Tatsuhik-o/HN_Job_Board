@@ -6,18 +6,42 @@ function App() {
   const [jobOffers, setJobOffers] = useState([]);
   const [allOffers, setAllOffers] = useState([]);
   const [numOffers, setNumOffers] = useState(9);
-  const backgroundColor = [
-    "#FFB6C1, #B0E0E6", // Light Pink to Powder Blue
-    "#E6E6FA, #98FB98", // Lavender to Pale Green
-    "#FFDAB9, #FFFFE0", // Peach Puff to Light Yellow
-    "#F08080, #AFEEEE", // Light Coral to Pale Turquoise
-    "#FFC0CB, #D3D3D3", // Pink to Light Gray
-    "#FAFAD2, #E0FFFF", // Light Goldenrod Yellow to Light Cyan
-    "#FFFACD, #E6E6FA", // Lemon Chiffon to Lavender
-    "#FFDEAD, #F0FFF0", // Navajo White to Honeydew
-    "#FFE4E1, #F5F5DC", // Misty Rose to Beige
-    "#E0FFFF, #F5FFFA", // Light Cyan to Mint Cream
+  const [bookmarkArea, setBookmarkArea] = useState(false);
+  const [bookmarkedJobs, setBookmarkedJobs] = useState([]);
+
+  const colors = [
+    "#FFDDC1",
+    "#CCF2E3",
+    "#DDD8FC",
+    "#CDEFFB",
+    "#F7DFF1",
+    "#E4E7ED",
+    "#FFD7B5",
+    "#C7EBDD",
+    "#D9D2F7",
+    "#CAEAF9",
+    "#F4DBED",
+    "#E0E3E9",
+    "#FFCEAC",
+    "#BBE2D3",
+    "#CDC6F4",
+    "#C4E3F6",
+    "#EED4E8",
+    "#DADDE4",
+    "#FFC4A1",
+    "#B0DBCB",
+    "#C7BFEE",
+    "#B9DDF1",
+    "#E3CCE3",
+    "#D3D7DF",
+    "#FFB68C",
+    "#A3D4C3",
+    "#BEB5EB",
+    "#AFD6EC",
+    "#DDBAD9",
+    "#CACED6",
   ];
+
   const tags = [
     "full-time",
     "part-time",
@@ -35,7 +59,7 @@ function App() {
   function generateRandomTags() {
     const randomNum = Math.floor(Math.random() * 2) + 2;
     return Array.from(
-      { length: Math.floor(Math.random() * 2) + 2 },
+      { length: 2 },
       () => tags[Math.floor(Math.random() * tags.length)]
     );
   }
@@ -59,12 +83,7 @@ function App() {
   }, []);
 
   function generateSalary() {
-    const randomRange1 = Math.ceil(Math.random() * 5);
-    let randomRange2 = Math.ceil(Math.random() * 10);
-    while (randomRange1 > randomRange2) {
-      randomRange2 = Math.ceil(Math.random() * 10);
-    }
-    return `$${randomRange1 * 1000} - $${randomRange2 * 1000}`;
+    return Math.floor((Math.random() * 30 + 30) * 0.52);
   }
 
   useEffect(() => {
@@ -78,7 +97,7 @@ function App() {
               const randomNumber = Math.floor(Math.random() * 10);
               return {
                 ...data,
-                background: backgroundColor[randomNumber],
+                background: colors[randomNumber],
                 salary: generateSalary(),
                 tag: generateRandomTags(),
               };
@@ -103,7 +122,7 @@ function App() {
               const randomNumber = Math.floor(Math.random() * 10);
               return {
                 ...data,
-                background: backgroundColor[randomNumber],
+                background: colors[randomNumber],
                 salary: generateSalary(),
                 tag: generateRandomTags(),
               };
@@ -117,14 +136,30 @@ function App() {
 
   return (
     <div className="app">
-      <h2>HN Job Board : </h2>
-      <Jobs jobOffers={jobOffers} />
-      <button
-        className="load_more"
-        onClick={() => setNumOffers(Math.min(numOffers + 6, 60))}
-      >
-        Load More
-      </button>
+      <div className="header">
+        <h2 className="headerTitle">HN Job Board : </h2>
+        <i
+          className="fa-duotone fa-bookmark"
+          onClick={() => setBookmarkArea(!bookmarkArea)}
+        ></i>
+      </div>
+      {bookmarkArea && (
+        <Jobs
+          jobOffers={bookmarkedJobs}
+          setBookmarkedJobs={setBookmarkedJobs}
+        />
+      )}
+      {!bookmarkArea && (
+        <Jobs jobOffers={jobOffers} setBookmarkedJobs={setBookmarkedJobs} />
+      )}
+      {numOffers !== 60 && !bookmarkArea && (
+        <button
+          className="load_more"
+          onClick={() => setNumOffers(Math.min(numOffers + 6, 60))}
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 }
