@@ -41,7 +41,6 @@ body {
   min-height: 200px;
   border: 1px solid black;
   padding: 5px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,5 +123,21 @@ body {
   transition: transform 0.2s ease-in-out;
   &:active {
     transform: scale(0.9);
+  }
+}
+@media only screen and (max-width: 900px) {
+  .app h2 {
+    font-size: 2.5rem;
+  }
+  .job {
+    width: 65%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .app h2 {
+    font-size: 2.5rem;
+  }
+  .job {
+    width: 80%;
   }
 }

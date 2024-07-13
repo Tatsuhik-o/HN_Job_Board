@@ -110,7 +110,6 @@ function App() {
             });
         });
       const newOffersDetails = await Promise.all(newRequests);
-      console.log(newOffersDetails);
       setJobOffers([...jobOffers, ...newOffersDetails]);
     }
     FetchNewOffers();
