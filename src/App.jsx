@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Jobs from "./assets/Components/Jobs";
+
 function App() {
   const [jobOffers, setJobOffers] = useState([]);
   const [allOffers, setAllOffers] = useState([]);
