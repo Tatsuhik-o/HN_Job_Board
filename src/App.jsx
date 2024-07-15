@@ -57,9 +57,9 @@ function App() {
     "consulting",
   ];
   function generateRandomTags() {
-    const randomNum = Math.floor(Math.random() * 2) + 2;
+    const randomNum = Math.floor(Math.random() * 2) + 1;
     return Array.from(
-      { length: 2 },
+      { length: randomNum },
       () => tags[Math.floor(Math.random() * tags.length)]
     );
   }

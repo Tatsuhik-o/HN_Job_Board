@@ -47,7 +47,7 @@ function Job({ jobOffer, setBookmarkedJobs }) {
             {company?.split(" ").slice(0, 3).join(" ")}
           </div>
           <div className="jobTitle">
-            {offerInfo?.split(" ").slice(0, 4).join(" ") || "A Position"}
+            {offerInfo?.split(" ").slice(0, 4).join(" ") || "Software Engineer"}
           </div>
           <div className="tags">
             {jobOffer?.tag.map((elem, index) => {
